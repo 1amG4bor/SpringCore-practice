@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <import resource="file:src/main/resources/strategy.xml" />
+
+    <bean id="customAuditoriumService" class="ua.epam.spring.hometask.service.CustomAuditoriumService">
+        <constructor-arg ref="auditoriumDAO"/>
+    </bean>
+
+    <bean id="customBookingService" class="ua.epam.spring.hometask.service.CustomBookingService">
+        <constructor-arg ref="ticketDAO"/>
+    </bean>
+
+    <bean id="customDiscountService" class="ua.epam.spring.hometask.service.CustomDiscountService">
+        <constructor-arg>
+            <list value-type="java.util.List">
+                <ref bean="birthdayStrategy"/>
+                <ref bean="the10thTicketStrategy"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="customDomainObjectService" class="ua.epam.spring.hometask.service.CustomDomainObjectService">
+        <constructor-arg ref="domainObjectDAO"/>
+    </bean>
+
+    <bean id="customEventService" class="ua.epam.spring.hometask.service.CustomEventService">
+        <constructor-arg ref="eventDAO"/>
+    </bean>
+
+    <bean id="customUserService" class="ua.epam.spring.hometask.service.CustomUserService">
+        <constructor-arg ref="userDAO"/>
+    </bean>
+</beans>

@@ -1,33 +1,39 @@
 package ua.epam.spring.hometask;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.epam.spring.hometask.domain.Auditorium;
 import ua.epam.spring.hometask.domain.Event;
-import ua.epam.spring.hometask.domain.EventRating;
 import ua.epam.spring.hometask.domain.User;
-import ua.epam.spring.hometask.service.UserService;
-
-import java.util.Arrays;
+import ua.epam.spring.hometask.service.CustomDomainObjectService;
+import ua.epam.spring.hometask.service.CustomUserService;
+import ua.epam.spring.hometask.service.DaoService;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.LongStream;
-import java.util.stream.Stream;
 
 public class Application {
+    private static CustomUserService userService;
+    private static CustomDomainObjectService domainService;
+    private static DaoService daoService;
+
     private static Scanner scanner = new Scanner(System.in);
 
+    public Application(CustomUserService userService, CustomDomainObjectService domainService, DaoService daoService) {
+        Application.userService = userService;
+        Application.domainService = domainService;
+        Application.daoService = daoService;
+    }
+
     public static void main(String[] args) {
-        System.out.println("********************************************");
-        System.out.println("* Application for managing a movie theater *");
-        System.out.println("********************************************");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("file:src/main/resources/spring.xml");
+        Application app = ctx.getBean("application", Application.class);
+        ((ClassPathXmlApplicationContext) ctx).refresh();
+
+        System.out.println("**********************************************");
+        System.out.println("** Application for managing a movie theater **");
+        System.out.println("**********************************************");
         System.out.println("...");
-
-        Auditorium mainRoom = new Auditorium("mainRoom", 20*15); // 20 line, 15 seats/line
-        mainRoom.setVipSeats(LongStream.rangeClosed(271, 300).boxed().collect(Collectors.toSet()));
-
-        Event ironman1 = new Event("Ironman 1.", 5.0, EventRating.MID);
-        Event ironman2 = new Event("Ironman 2.", 7.0, EventRating.HIGH);
-        Event ironman3 = new Event("Ironman 3.", 7.5, EventRating.MID);
 
         System.out.println("Please, add your firstname: ");
         String firstName = scanner.nextLine();
@@ -35,11 +41,30 @@ public class Application {
         String lastName = scanner.nextLine();
         System.out.println("Please, add your email: ");
         String email = scanner.nextLine();
-        User user = new User(firstName, lastName, email);
-        System.out.println("Thank you, " + firstName + "\n Your registered data are: " + user.toString());
+        User newUser = new User(firstName, lastName, email, 1975, 01, 01);
+        userService.save(newUser);
+        if (userService.save(newUser).equals(null)) {
+            System.out.println("Some error has happened, please, restart the application!");
+            System.exit(1);
+        }
+        System.out.println("Thank you, " + firstName + "!\n Your are successfully registered as: " + userService.getById(newUser.getId()).getFullName());
 
+        System.out.println("All of the Auditoriums:");
+        List<Auditorium> rooms = new ArrayList<>(daoService.getAuditoriumDAO().getAll());
+        rooms.stream().forEach(item -> System.out.println(item.toString()));
+        System.out.println();
+        System.out.println("All of the Events:");
+        List<Event> events = new ArrayList<>(daoService.getEventDAO().getAll());
+        events.stream().forEach(item -> System.out.println(item.toString()));
+        System.out.println();
+        System.out.println("All of the Users:");
+        List<User> users = new ArrayList<>(daoService.getUserDAO().getAll());
+        users.stream().forEach(item -> System.out.println(item.toString()));
+        System.out.println();
+        System.out.println("Exit...");
+    }
 
-
-
+    public static CustomDomainObjectService getDomainService() {
+        return domainService;
     }
 }

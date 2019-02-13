@@ -1,4 +1,4 @@
-package ua.epam.spring.hometask.service;
+package ua.epam.spring.hometask.service.Interface;
 
 import java.util.Collection;
 
@@ -27,7 +27,7 @@ public interface AbstractDomainObjectService<T extends DomainObject> {
      * Removing object from storage
      * 
      * @param object
-     *            Object to remove
+     *            Object to removeDomain
      */
     public void remove(@Nonnull T object);
 

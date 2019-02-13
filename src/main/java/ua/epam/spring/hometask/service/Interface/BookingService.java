@@ -1,4 +1,4 @@
-package ua.epam.spring.hometask.service;
+package ua.epam.spring.hometask.service.Interface;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -19,7 +19,7 @@ public interface BookingService {
      * Getting price when buying all supplied seats for particular event
      * 
      * @param event
-     *            Event to get base ticket price, vip seats and other
+     *            Event to getDomain base ticket price, vip seats and other
      *            information
      * @param dateTime
      *            Date and time of event air
@@ -46,7 +46,7 @@ public interface BookingService {
      * Getting all purchased tickets for event on specific air date and time
      * 
      * @param event
-     *            Event to get tickets for
+     *            Event to getDomain tickets for
      * @param dateTime
      *            Date and time of airing of event
      * @return set of all purchased tickets

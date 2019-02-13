@@ -7,13 +7,9 @@ import java.util.Objects;
  * @author Yuriy_Tkach
  */
 public class Ticket extends DomainObject implements Comparable<Ticket> {
-
     private User user;
-
     private Event event;
-
     private LocalDateTime dateTime;
-
     private long seat;
 
     public Ticket(User user, Event event, LocalDateTime dateTime, long seat) {

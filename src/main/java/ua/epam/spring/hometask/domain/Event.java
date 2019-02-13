@@ -12,16 +12,14 @@ import java.util.TreeSet;
  * @author Yuriy_Tkach
  */
 public class Event extends DomainObject {
-
     private String name;
-
     private NavigableSet<LocalDateTime> airDates = new TreeSet<>();
-
     private double basePrice;
-
     private EventRating rating;
-
     private NavigableMap<LocalDateTime, Auditorium> auditoriums = new TreeMap<>();
+
+    public Event() {
+    }
 
     public Event(String name, double basePrice, EventRating rating) {
         this.name = name;
@@ -53,7 +51,7 @@ public class Event extends DomainObject {
      * Removes auditorium assignment from event
      * 
      * @param dateTime
-     *            Date and time to remove auditorium for
+     *            Date and time to removeDomain auditorium for
      * @return <code>true</code> if successful, <code>false</code> if not
      *         removed
      */
@@ -96,7 +94,7 @@ public class Event extends DomainObject {
      * that date and time - the assignment is also removed
      * 
      * @param dateTime
-     *            Date and time to remove
+     *            Date and time to removeDomain
      * @return <code>true</code> if successful, <code>false</code> if not there
      */
     public boolean removeAirDateTime(LocalDateTime dateTime) {
@@ -211,4 +209,12 @@ public class Event extends DomainObject {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Event{" +
+                "name='" + name + '\'' +
+                ", basePrice=" + basePrice +
+                ", rating=" + rating +
+                '}';
+    }
 }

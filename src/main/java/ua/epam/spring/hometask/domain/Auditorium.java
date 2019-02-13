@@ -10,18 +10,25 @@ import java.util.stream.LongStream;
 /**
  * @author Yuriy_Tkach
  */
-public class Auditorium {
-
+public class Auditorium extends DomainObject {
     private String name;
-
     private long numberOfSeats;
-
     private Set<Long> vipSeats = Collections.emptySet();
+
+    public Auditorium() {
+    }
 
     public Auditorium(String name, long numberOfSeats) {
         this.name = name;
         this.numberOfSeats = numberOfSeats;
     }
+
+    private void init(String name, long numberOfSeats, Set<Long> vipSeats) {
+        this.name = name;
+        this.numberOfSeats = numberOfSeats;
+        this.setVipSeats(vipSeats);
+    }
+
 
     /**
      * Counts how many vip seats are there in supplied <code>seats</code>
@@ -89,4 +96,12 @@ public class Auditorium {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Auditorium{" +
+                "name='" + name + '\'' +
+                ", number of seats=" + numberOfSeats +
+                ", number of vip-seats=" + vipSeats.size() +
+                '}';
+    }
 }

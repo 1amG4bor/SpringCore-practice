@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="birthdayStrategy" class="ua.epam.spring.hometask.service.BirthdayStrategy"/>
+
+    <bean id="the10thTicketStrategy" class="ua.epam.spring.hometask.service.The10thTicketStrategy"/>
+
+</beans>

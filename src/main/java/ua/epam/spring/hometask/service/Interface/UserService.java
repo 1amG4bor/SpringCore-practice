@@ -1,4 +1,4 @@
-package ua.epam.spring.hometask.service;
+package ua.epam.spring.hometask.service.Interface;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
