@@ -1,12 +1,16 @@
 package ua.epam.spring.hometask.DAO;
 
+import org.springframework.stereotype.Repository;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.EventRating;
+
+import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+@Repository
 public class EventDAO {
     private static Map<Long, Event> eventMap;
 
@@ -14,14 +18,18 @@ public class EventDAO {
         eventMap = new HashMap<>();
     }
 
+    @PostConstruct
     public void initData() {
         LocalDateTime now = LocalDateTime.now();
         Event terminator1 = new Event("Terminator", 5, EventRating.MID);
         Event terminator2 = new Event("Terminator-2, Judgment Day", 5, EventRating.HIGH);
         Event terminator3 = new Event("Terminator-3,  Rise of the Machines", 5, EventRating.LOW);
-        eventMap.put(3L, terminator1);
-        eventMap.put(4L, terminator2);
-        eventMap.put(5L, terminator3);
+        terminator1.setId(1L);
+        terminator2.setId(2L);
+        terminator3.setId(3L);
+        eventMap.put(terminator1.getId(), terminator1);
+        eventMap.put(terminator2.getId(), terminator2);
+        eventMap.put(terminator3.getId(), terminator3);
     }
 
     public Event getEvent(Long id) {

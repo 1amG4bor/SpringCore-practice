@@ -1,12 +1,15 @@
 package ua.epam.spring.hometask.domain;
 
+import org.springframework.stereotype.Component;
 import ua.epam.spring.hometask.service.CustomDomainObjectService;
 
+import javax.persistence.Entity;
 import java.util.Random;
 
 /**
  * @author Yuriy_Tkach
  */
+@Entity
 public class DomainObject {
     private CustomDomainObjectService domainService;
     private Long id;

@@ -1,5 +1,7 @@
 package ua.epam.spring.hometask.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ua.epam.spring.hometask.DAO.TicketDAO;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.Ticket;
@@ -13,10 +15,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Service
 public class CustomBookingService implements BookingService {
-
     private TicketDAO ticketDAO;
 
+    @Autowired
     public CustomBookingService(TicketDAO ticketDAO) {
         this.ticketDAO = ticketDAO;
     }

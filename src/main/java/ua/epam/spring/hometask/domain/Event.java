@@ -1,16 +1,19 @@
 package ua.epam.spring.hometask.domain;
 
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.Entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.NavigableMap;
-import java.util.NavigableSet;
-import java.util.Objects;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @author Yuriy_Tkach
  */
+@Entity
+@Component
 public class Event extends DomainObject {
     private String name;
     private NavigableSet<LocalDateTime> airDates = new TreeSet<>();

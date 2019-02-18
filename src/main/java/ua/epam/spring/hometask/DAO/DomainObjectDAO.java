@@ -1,11 +1,12 @@
 package ua.epam.spring.hometask.DAO;
 
+import org.springframework.stereotype.Repository;
 import ua.epam.spring.hometask.domain.DomainObject;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+@Repository
 public class DomainObjectDAO {
     private static Map<Long, DomainObject> domainMap;
 

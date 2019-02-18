@@ -1,5 +1,6 @@
 package ua.epam.spring.hometask.domain;
 
+import javax.persistence.Entity;
 import java.time.LocalDate;
 import java.util.NavigableSet;
 import java.util.Objects;
@@ -8,17 +9,20 @@ import java.util.TreeSet;
 /**
  * @author Yuriy_Tkach
  */
+@Entity
 public class User extends DomainObject {
     private String firstName;
     private String lastName;
     private String email;
     private LocalDate dateOfBirth;
+    private String hashedPassword;
 
-    public User(String firstName, String lastName, String email, int year, int month, int day) {
+    public User(String firstName, String lastName, String email, LocalDate dateOfBirth, String hashedPassword) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.dateOfBirth = LocalDate.of(year, month, day);
+        this.dateOfBirth = dateOfBirth;
+        this.hashedPassword = hashedPassword;
     }
 
     private NavigableSet<Ticket> tickets = new TreeSet<>();
@@ -51,8 +55,16 @@ public class User extends DomainObject {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(int year, int month, int day) {
-        this.dateOfBirth = LocalDate.of(year, month, day);;
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getHashedPassword() {
+        return hashedPassword;
+    }
+
+    public void setHashedPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
     }
 
     public NavigableSet<Ticket> getTickets() {

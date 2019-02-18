@@ -1,5 +1,6 @@
 package ua.epam.spring.hometask.service;
 
+import org.springframework.stereotype.Service;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.service.Interface.DiscountService;
@@ -10,8 +11,8 @@ import javax.annotation.Nullable;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class CustomDiscountService implements DiscountService {
-
     private List<DiscountStrategy> discountList;
 
     public CustomDiscountService(List<DiscountStrategy> discountList) {

@@ -1,5 +1,8 @@
 package ua.epam.spring.hometask.domain;
 
+import org.springframework.stereotype.Component;
+
+import javax.persistence.Entity;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
@@ -10,6 +13,8 @@ import java.util.stream.LongStream;
 /**
  * @author Yuriy_Tkach
  */
+
+@Entity
 public class Auditorium extends DomainObject {
     private String name;
     private long numberOfSeats;

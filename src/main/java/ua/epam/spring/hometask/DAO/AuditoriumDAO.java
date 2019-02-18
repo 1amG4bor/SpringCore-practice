@@ -1,13 +1,18 @@
 package ua.epam.spring.hometask.DAO;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ua.epam.spring.hometask.domain.Auditorium;
 
+import javax.annotation.PostConstruct;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
+@Repository
 public class AuditoriumDAO {
     private static Map<Long, Auditorium> auditoriumMap;
 
@@ -15,15 +20,16 @@ public class AuditoriumDAO {
         auditoriumMap = new HashMap<>();
     }
 
+    @PostConstruct
     public void initData() {
         Auditorium main = new Auditorium("Main room", 180);
         main.setVipSeats(LongStream.rangeClosed(156, 180).boxed().collect(Collectors.toSet()));
         auditoriumMap.put(0L, main);
         Auditorium room1 = new Auditorium("Room-1", 80);
-        main.setVipSeats(LongStream.rangeClosed(65, 80).boxed().collect(Collectors.toSet()));
+        room1.setVipSeats(LongStream.rangeClosed(65, 80).boxed().collect(Collectors.toSet()));
         auditoriumMap.put(1L, room1);
         Auditorium room2 = new Auditorium("Room-2", 60);
-        main.setVipSeats(LongStream.rangeClosed(45, 60).boxed().collect(Collectors.toSet()));
+        room2.setVipSeats(LongStream.rangeClosed(45, 60).boxed().collect(Collectors.toSet()));
         auditoriumMap.put(2L, room2);
     }
 

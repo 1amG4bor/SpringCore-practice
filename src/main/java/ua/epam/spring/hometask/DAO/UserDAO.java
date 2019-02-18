@@ -1,16 +1,25 @@
 package ua.epam.spring.hometask.DAO;
 
+import org.springframework.stereotype.Repository;
 import ua.epam.spring.hometask.domain.User;
 
+import javax.annotation.PostConstruct;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+@Repository
 public class UserDAO {
     private static Map<Long, User> userMap;
 
     public UserDAO() {
         userMap = new HashMap<>();
+    }
+
+    @PostConstruct
+    public void initData() {
+        userMap.put(0L, new User("admin", " ", "admin", LocalDate.of(2000,1,1), "21232f297a57a5a743894ae4a801fc3"));
     }
 
     public User getUser(Long id) {
